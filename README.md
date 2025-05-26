@@ -15,6 +15,9 @@ A simple console app to manage a library using **C#**, **EF Core (Database First
 ## 📁 Project Structure
 
 LibraryManagementSystem/
+
+
+
 ├── Models/ # Auto-generated EF Core models
 ├── Services/ # Business logic (BookService, AuthorService)
 ├── Program.cs # App entry point
