@@ -95,42 +95,35 @@ Program.cs
 Visit in your browser:
 Open https://localhost:5001 (or the port configured).
 
+---
 
 
+## Authentication & Authorization
 
-Authentication & Authorization
-Uses ASP.NET Identity for managing users and roles.
+- **Uses ASP.NET Identity** for managing users and roles.
+- Registration, login, and logout for users.
+- **Role-based access:**
+  - **Admin:** Full permissions (manage books, users, view all transactions).
+  - **User:** Can view books and manage their own borrowing activity.
+- **Protected routes:**
+  - Unauthenticated users cannot access any book or transaction routes.
 
-Registration, login, and logout for users.
+---
 
-Role-based access:
+## Borrowing Transactions
 
-Admin: Full permissions (manage books, users, view all transactions).
+- Users can borrow and return books.
+- Admins can view all transactions.
+- Transaction history is linked to each user.
+- Validation to prevent borrowing the same book twice, or borrowing unavailable books.
 
-User: Can view books and manage their own borrowing activity.
+---
 
-Protected routes:
+## SOLID Principles
 
-Unauthenticated users cannot access any book or transaction routes.
-
-Borrowing Transactions
-Users can borrow and return books.
-
-Admins can view all transactions.
-
-Transaction history is linked to each user.
-
-Validation to prevent borrowing the same book twice, or borrowing unavailable books.
-
-SOLID Principles
-Built from the ground up with SOLID in mind:
-
-Single Responsibility: Each component does one thing and does it well.
-
-Open/Closed: Easy to extend with new features, hard to break existing ones.
-
-Liskov Substitution: Interfaces and inheritance done right.
-
-Interface Segregation: No bloated interfaces.
-
-Dependency Inversion: Controllers and services depend on abstractions, not concrete classes.
+Built from the ground up with **SOLID** in mind:
+- **Single Responsibility:** Each component does one thing and does it well.
+- **Open/Closed:** Easy to extend with new features, hard to break existing ones.
+- **Liskov Substitution:** Interfaces and inheritance done right.
+- **Interface Segregation:** No bloated interfaces.
+- **Dependency Inversion:** Controllers and services depend on abstractions, not concrete classes.
