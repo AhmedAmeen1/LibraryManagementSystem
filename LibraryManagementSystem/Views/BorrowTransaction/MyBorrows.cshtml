@@ -1,0 +1,157 @@
+﻿@model IEnumerable<BorrowViewModel>
+@{
+    ViewData["Title"] = "My Borrowed Books";
+}
+<style>
+    .borrowed-bg {
+        min-height: 86vh;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        background: linear-gradient(120deg, #267871 0%, #136a8a 100%);
+        padding: 2.2rem 0 2.6rem 0;
+    }
+
+    .borrowed-container {
+        width: 100%;
+        max-width: 1050px;
+    }
+
+    .borrowed-title {
+        color: #fff;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        text-shadow: 0 3px 18px #26787154;
+    }
+
+    .borrowed-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 2rem;
+    }
+
+    .borrow-card {
+        background: #fff;
+        border-radius: 1.14rem;
+        box-shadow: 0 4px 32px rgba(30,70,120,0.13);
+        padding: 1.5rem 1.25rem 1.15rem 1.25rem;
+        display: flex;
+        flex-direction: column;
+        min-height: 200px;
+        animation: fadeIn 0.7s cubic-bezier(0.5,0,0.3,1);
+        position: relative;
+    }
+    
+
+    .borrow-card-title {
+        font-size: 1.16rem;
+        font-weight: 600;
+        color: #136a8a;
+        margin-bottom: 0.37rem;
+    }
+
+    .borrow-card-dates {
+        font-size: 1.04rem;
+        color: #267871;
+        margin-bottom: 0.17rem;
+    }
+
+    .borrow-status {
+        margin-top: 0.7rem;
+        font-weight: 600;
+        font-size: 1.02rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+    }
+
+        .borrow-status .status-returned {
+            color: #26ae60;
+            background: #d4f7ef;
+            border-radius: 0.7em;
+            padding: 0.16em 0.9em;
+            font-size: 1rem;
+        }
+
+        .borrow-status .status-not-returned {
+            color: #e74c3c;
+            background: #fae1e1;
+            border-radius: 0.7em;
+            padding: 0.16em 0.9em;
+            font-size: 1rem;
+        }
+
+    .borrow-card-actions {
+        margin-top: auto;
+        text-align: right;
+    }
+
+        .borrow-card-actions .btn {
+            min-width: 86px;
+            border-radius: 0.48rem;
+            font-weight: 500;
+            font-size: 1.02rem;
+        }
+   
+
+    .borrow-card {
+        padding: 1rem 0.5rem 0.7rem 0.5rem;
+    }
+
+    }
+</style>
+
+<div class="borrowed-bg">
+    <div class="borrowed-container">
+        <div class="borrowed-title">
+            <i class="bi bi-bookmark-check" style="font-size:1.25rem; vertical-align:-2px; color:#fff;"></i>
+            My Borrowed Books
+        </div>
+        <div class="borrowed-cards">
+            @foreach (var borrow in Model)
+            {
+                <div class="borrow-card">
+                    <div class="borrow-card-title">@borrow.BookTitle</div>
+                    <div class="borrow-card-dates">
+                        <span title="Borrowed on">
+                            <i class="bi bi-calendar-date"></i>
+                            @borrow.BorrowDate.ToString("yyyy-MM-dd")
+                        </span>
+                        <br />
+                        <span title="Due">
+                            <i class="bi bi-calendar-check"></i>
+                            Due: @borrow.DueDate.ToString("yyyy-MM-dd")
+                        </span>
+                    </div>
+                    <div class="borrow-status">
+                        @if (borrow.ReturnDate.HasValue)
+                        {
+                            <span class="status-returned">
+                                <i class="bi bi-check-circle"></i>
+                                Returned: @borrow.ReturnDate.Value.ToString("yyyy-MM-dd")
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="status-not-returned">
+                                <i class="bi bi-exclamation-circle"></i>
+                                Not returned
+                            </span>
+                        }
+                    </div>
+                    <div class="borrow-card-actions">
+                        @if (!borrow.ReturnDate.HasValue)
+                        {
+                            <form asp-action="Return" asp-route-transactionId="@borrow.TransactionID" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-success btn-sm mt-2">Return</button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

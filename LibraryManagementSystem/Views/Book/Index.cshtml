@@ -1,0 +1,148 @@
+﻿@model IEnumerable<BookViewModel>
+@{
+    ViewData["Title"] = "Books Management";
+}
+<style>
+    .admin-hero {
+        background: linear-gradient(90deg, #363795 0%, #005c97 100%);
+        color: #fff;
+        border-radius: 1.1rem;
+        padding: 2rem 1.3rem 1.3rem 1.3rem;
+        box-shadow: 0 2px 24px rgba(50,60,160,0.11);
+        text-align: center;
+        margin-bottom: 2.2rem;
+    }
+
+    .admin-books-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+        gap: 2rem;
+    }
+
+    .admin-book-card {
+        background: #fff;
+        border-radius: 1.07rem;
+        box-shadow: 0 2px 24px rgba(40,70,130,0.09);
+        padding: 1.5rem 1.1rem 1.1rem 1.1rem;
+        position: relative;
+        transition: box-shadow 0.23s;
+        display: flex;
+        flex-direction: column;
+        min-height: 215px;
+    }
+
+        .admin-book-card:hover {
+            box-shadow: 0 6px 38px rgba(50,90,180,0.17);
+            transform: translateY(-3px) scale(1.012);
+        }
+
+    .admin-book-title {
+        font-size: 1.19rem;
+        font-weight: 600;
+        color: #005c97;
+        margin-bottom: 0.3rem;
+    }
+
+    .admin-book-genre {
+        font-size: 0.98rem;
+        color: #363795;
+        font-weight: 500;
+        margin-bottom: 0.58rem;
+    }
+
+    .admin-book-author {
+        font-size: 0.99rem;
+        color: #42495a;
+        margin-bottom: 0.6rem;
+    }
+
+    .admin-badge-total {
+        font-size: 0.98rem;
+        border-radius: 50px;
+        padding: 0.2em 1em;
+        color: #fff;
+        background: #363795;
+        position: absolute;
+        left: 1.1rem;
+        top: 1.1rem;
+        font-weight: 500;
+    }
+
+    .admin-badge-avail {
+        font-size: 0.98rem;
+        border-radius: 50px;
+        padding: 0.2em 1em;
+        color: #fff;
+        background: #28a745;
+        position: absolute;
+        right: 1.1rem;
+        top: 1.1rem;
+        font-weight: 500;
+    }
+
+        .admin-badge-avail.bg-danger {
+            background: #e74c3c !important;
+        }
+
+    .admin-actions {
+        display: flex;
+        gap: 0.6rem;
+        margin-top: auto;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+    }
+
+        .admin-actions a, .admin-actions button {
+            min-width: 82px;
+            border-radius: 0.48rem !important;
+            font-weight: 500;
+            font-size: 0.97rem;
+            box-shadow: none !important;
+        }
+    
+</style>
+
+<div class="admin-hero">
+    <h2 style="font-size:2.05rem; font-weight:700; letter-spacing:0.04em; margin-bottom:0.5rem;">
+        Books Management
+    </h2>
+    <div style="font-size:1.13rem; font-weight:500;">
+        Add, edit, or remove books from your library database below.
+    </div>
+</div>
+<div style="margin-bottom:1.5rem;">
+    <a asp-action="Create" class="btn btn-primary" style="font-size:1.05rem; font-weight:600; border-radius:0.48rem;">
+        <i class="bi bi-plus-lg"></i> Add New Book
+    </a>
+</div>
+
+<div class="admin-books-grid">
+    @foreach (var book in Model)
+    {
+        <div class="admin-book-card">
+            <!-- TITLE ON TOP -->
+            <div class="admin-book-title" style="margin-bottom: 0.43rem;">
+                @book.Title
+            </div>
+            <!-- BADGES ROW -->
+            <div style="display: flex; gap: 0.8em; align-items: center; margin-bottom: 0.75rem;">
+                <span class="admin-badge-total">Total: @book.TotalQuantity</span>
+                <span class="admin-badge-avail @(book.AvailableQuantity == 0 ? "bg-danger" : "")">
+                    @(book.AvailableQuantity > 0 ? $"Avail: {book.AvailableQuantity}" : "Not Avail")
+                </span>
+            </div>
+            <div class="admin-book-genre" style="margin-bottom: 0.18rem;">@book.Genre</div>
+            <div class="admin-book-author" style="margin-bottom: 1.1rem;">
+                by <span style="color:#363795;">@book.Author</span>
+            </div>
+            <div class="admin-actions" style="margin-top: auto;">
+                <a asp-action="Details" asp-route-id="@book.Id" class="btn btn-info btn-sm">Details</a>
+                <a asp-action="Edit" asp-route-id="@book.Id" class="btn btn-warning btn-sm">Edit</a>
+                <form asp-action="Delete" asp-route-id="@book.Id" method="post" class="d-inline"
+                      onsubmit="return confirm('Are you sure you want to delete this book?');">
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </div>
+        </div>
+    }
+</div>

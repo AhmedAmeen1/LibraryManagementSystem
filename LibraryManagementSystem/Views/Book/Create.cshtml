@@ -1,0 +1,135 @@
+﻿@model BookEditViewModel
+@{
+    ViewData["Title"] = "Add New Book";
+}
+<style>
+    .bookform-bg {
+        min-height: 86vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(120deg, #267871 0%, #136a8a 100%);
+        padding: 2rem 0;
+    }
+
+    .bookform-card {
+        background: #fff;
+        border-radius: 1.08rem;
+        box-shadow: 0 4px 44px rgba(30,70,120,0.18);
+        padding: 2.3rem 2.2rem 1.6rem 2.2rem;
+        width: 100%;
+        max-width: 500px;
+        animation: fadeIn 0.7s cubic-bezier(0.5,0,0.3,1);
+    }
+    
+
+    .bookform-card h2 {
+        color: #136a8a;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        margin-bottom: 1.4rem;
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .bookform-label {
+        font-size: 1.01rem;
+        color: #136a8a;
+        font-weight: 500;
+    }
+
+    .bookform-input {
+        border-radius: 0.6rem;
+        font-size: 1.06rem;
+        border: 1px solid #e2e5ec;
+        margin-bottom: 0.7rem;
+    }
+
+        .bookform-input:focus {
+            border-color: #267871;
+            box-shadow: 0 0 0 2px #136a8a22;
+        }
+
+    .text-danger {
+        font-size: 0.98rem;
+        margin-bottom: 0.55rem;
+    }
+
+    .bookform-btn {
+        min-width: 100px;
+        padding: 0.57em 0;
+        font-size: 1.13rem;
+        border-radius: 0.53rem;
+        border: none;
+        background: linear-gradient(90deg, #267871 0%, #136a8a 100%);
+        color: #fff;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        box-shadow: 0 2px 14px #26787118;
+        transition: background 0.17s;
+        margin-right: 0.7rem;
+    }
+
+        .bookform-btn:hover {
+            background: linear-gradient(90deg, #136a8a 0%, #267871 100%);
+        }
+
+    .bookform-cancel {
+        min-width: 95px;
+        border-radius: 0.53rem;
+        font-size: 1.12rem;
+        font-weight: 500;
+        border: 1px solid #c1c3cc;
+        background: #f4f4f7;
+        color: #555;
+        transition: background 0.16s;
+    }
+
+        .bookform-cancel:hover {
+            background: #e6e7eb;
+            color: #136a8a;
+        }
+    
+</style>
+
+<div class="bookform-bg">
+    <div class="bookform-card">
+        <h2>
+            <i class="bi bi-journal-plus" style="font-size:1.35rem; vertical-align:-3px; color:#267871;"></i>
+            Add New Book
+        </h2>
+        <form asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="mb-3">
+                <label asp-for="Title" class="bookform-label"></label>
+                <input asp-for="Title" class="form-control bookform-input" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Author" class="bookform-label"></label>
+                <input asp-for="Author" class="form-control bookform-input" />
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Genre" class="bookform-label"></label>
+                <input asp-for="Genre" class="form-control bookform-input" />
+                <span asp-validation-for="Genre" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="TotalQuantity" class="bookform-label"></label>
+                <input asp-for="TotalQuantity" type="number" class="form-control bookform-input" />
+                <span asp-validation-for="TotalQuantity" class="text-danger"></span>
+            </div>
+            <div class="mt-3 d-flex justify-content-end">
+                <button type="submit" class="btn bookform-btn">Save</button>
+                <a asp-action="Index" class="btn bookform-cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
