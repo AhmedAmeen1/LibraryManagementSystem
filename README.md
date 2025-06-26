@@ -1,185 +1,129 @@
-📚 Library Management System
+# Library Management System
+
 A pragmatic Library Management System built with ASP.NET Core MVC. Implements SOLID principles, real authentication & authorization, borrowing transactions, and fully protected routes.
 
-<div align="center">
-![.NET](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=io/badge/c%23-%23239120.svg?style=forServer](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor/badge/bootstrap-%23563D7C.svg?style of Contents
+---
 
-🏗️ Project Structure
+## Table of Contents
 
-✨ Features
+- [Project Structure](#project-structure)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Authentication & Authorization](#authentication--authorization)
+- [Borrowing Transactions](#borrowing-transactions)
+- [SOLID Principles](#solid-principles)
+- [License](#license)
 
-🛠️ Tech Stack
+---
 
-🚀 Getting Started
+## Project Structure
 
-🔐 Authentication & Authorization
+/bin
+/Controllers
+/Migrations
+/Models
+/obj
+/Properties
+/Repository
+/ViewModel
+/Views
+/wwwroot
+appsettings.json
+appsettings.Development.json
+LibraryManagementSystem.csproj
+Program.cs
 
-📖 Borrowing Transactions
 
-🎯 SOLID Principles
 
-📄 License
+- **Controllers**: Handle HTTP requests, actions, and business logic.
+- **Models**: Define database entities and core data structures.
+- **Repository**: Abstracts and handles all data operations.
+- **ViewModel**: Data passed between controllers and views.
+- **Views**: Razor views for the UI.
+- **Migrations**: Entity Framework migrations.
+- **wwwroot**: Static assets (CSS, JS, images).
+- **Configuration**: App settings and project files.
 
-🏗️ Project Structure
-text
-📦 LibraryManagementSystem
-├── 📁 bin/
-├── 📁 Controllers/          # 🎮 HTTP request handlers
-├── 📁 Migrations/           # 🗃️ Database migrations
-├── 📁 Models/               # 📊 Data entities
-├── 📁 obj/
-├── 📁 Properties/
-├── 📁 Repository/           # 🏪 Data access layer
-├── 📁 ViewModel/            # 📋 View data models
-├── 📁 Views/                # 🖼️ Razor UI templates
-├── 📁 wwwroot/              # 🌐 Static assets
-├── ⚙️ appsettings.json
-├── ⚙️ appsettings.Development.json
-├── 📄 LibraryManagementSystem.csproj
-└── 🚀 Program.cs
-✨ Features
-Feature	Description
-👤 User Management	Registration, login, and profile management
-🛡️ Role-Based Access	Admin and user roles with different permissions
-🔒 Protected Routes	Secure endpoints - no unauthorized access
-📚 Book Management	Full CRUD operations for library catalog
-🔄 Borrowing System	Seamless book borrowing and return process
-📊 Transaction History	Complete audit trail of all activities
-🏗️ Clean Architecture	SOLID principles and repository pattern
-🔧 Extensible Design	Ready for real-world deployment and scaling
-🛠️ Tech Stack
-<div align="center">
-Technology	Purpose
-![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-512BD4?style=flatio/badge/Entity%20Framework-512BD4?style=flat-square&logo=dotnet&logoColor=whiteelds.io/badge/C%23-239120?style=flat-square&logo=c-sharp&logoColor	
-![Razor](https://img.shields.io/badge/Razor-512BD4?style=flat-square&logo=dotnet&logoColor	
-✅ .NET 6.0 or later
+---
 
-✅ SQL Server (LocalDB or full instance)
+## Features
 
-✅ Visual Studio 2022 or VS Code
+- User registration and login
+- Role-based authorization (admin, user)
+- **Protected routes**—no access for unauthenticated users
+- CRUD operations for books and users
+- Borrowing transactions (borrow and return books)
+- History of borrow/return activity per user
+- Clean project structure following SOLID and repository pattern
+- Extensible, maintainable, ready for real-world use
 
-Installation
-📥 Clone the repository
+---
 
-bash
-git clone https://github.com/AhmedAmeen1/LibraryManagementSystem
-cd LibraryManagementSystem
-📦 Restore dependencies
+## Tech Stack
 
-bash
-dotnet restore
-⚙️ Configure database
+- **ASP.NET Core MVC**
+- **Entity Framework Core**
+- **SQL Server** (or any compatible DB)
+- **C#**
+- **Razor Views**
+- **Bootstrap** (if used)
 
-Edit appsettings.json with your connection string:
+---
 
-json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=LibraryDB;Trusted_Connection=true"
-  }
-}
-🗃️ Apply migrations
+## Getting Started
 
-bash
-dotnet ef database update
-🚀 Run the application
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/AhmedAmeen1/LibraryManagementSystem
+   cd LibraryManagementSystem
 
-bash
-dotnet run
-🌐 Open in browser
 
-Navigate to: https://localhost:5001
+2. **Restore Dependencies**
+  dotnet restore
 
-🔐 Authentication & Authorization
-<div align="center">
-Role	Permissions
-👑 Admin	- Manage all books
-- View all users
-- Access all transactions
-- System administration
-👤 User	- Browse book catalog
-- Borrow/return books
-- View personal history
-- Manage profile
-</div>
-🛡️ Security Features
-✅ ASP.NET Identity integration
+3. **Restore Dependencies**
+  Edit appsettings.json with your DB connection string.
 
-✅ Secure password hashing
+4. **Run EF migrations**
+  dotnet ef database update
 
-✅ Session management
+5. **Start the app**
+  dotnet run
 
-✅ Route protection
+6. **Visit in your browser**
+Visit in your browser:
+Open https://localhost:5001 (or the port configured).
 
-✅ CSRF protection
+---
 
-✅ Input validation
 
-📖 Borrowing Transactions
-🔄 Workflow
-text
-graph LR
-    A[📚 Browse Books] --> B{Available?}
-    B -->|Yes| C[📋 Borrow Request]
-    B -->|No| D[❌ Wait for Return]
-    C --> E[✅ Book Borrowed]
-    E --> F[📅 Due Date Set]
-    F --> G[📖 Reading Period]
-    G --> H[📤 Return Book]
-    H --> I[✅ Transaction Complete]
-📊 Features
-🚫 Duplicate Prevention: Can't borrow the same book twice
+## Authentication & Authorization
 
-📅 Due Date Tracking: Automatic due date calculation
+- **Uses ASP.NET Identity** for managing users and roles.
+- Registration, login, and logout for users.
+- **Role-based access:**
+  - **Admin:** Full permissions (manage books, users, view all transactions).
+  - **User:** Can view books and manage their own borrowing activity.
+- **Protected routes:**
+  - Unauthenticated users cannot access any book or transaction routes.
 
-📈 Usage Analytics: Track popular books and user activity
+---
 
-🔍 Search & Filter: Find books by title, author, or category
+## Borrowing Transactions
 
-🎯 SOLID Principles
-Our architecture follows SOLID principles for maintainable, scalable code:
+- Users can borrow and return books.
+- Admins can view all transactions.
+- Transaction history is linked to each user.
+- Validation to prevent borrowing the same book twice, or borrowing unavailable books.
 
-Principle	Implementation
-🎯 Single Responsibility	Each class has one clear purpose
-🔓 Open/Closed	Easy to extend, protected from modification
-🔄 Liskov Substitution	Proper inheritance and interface usage
-🧩 Interface Segregation	Focused, specific interfaces
-🔀 Dependency Inversion	Depend on abstractions, not concretions
-🏗️ Architecture Benefits
-✅ Testable: Easy unit testing with dependency injection
+---
 
-✅ Maintainable: Clear separation of concerns
+## SOLID Principles
 
-✅ Scalable: Add features without breaking existing code
-
-✅ Flexible: Swap implementations easily
-
-🤝 Contributing
-We welcome contributions! Please see our Contributing Guidelines for details.
-
-🍴 Fork the repository
-
-🌿 Create a feature branch
-
-💻 Make your changes
-
-✅ Add tests
-
-📝 Submit a pull request
-
-📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-<div align="center">
-🌟 Star this repository if you found it helpful!
-Built with ❤️ by Ahmed Ameen
-
-</div>
-📞 Support
-Having issues? We're here to help!
-
-🐛 Report a Bug
-
-💡 Request a Feature
-
-📧 Contact Support
+Built from the ground up with **SOLID** in mind:
+- **Single Responsibility:** Each component does one thing and does it well.
+- **Open/Closed:** Easy to extend with new features, hard to break existing ones.
+- **Liskov Substitution:** Interfaces and inheritance done right.
+- **Interface Segregation:** No bloated interfaces.
+- **Dependency Inversion:** Controllers and services depend on abstractions, not concrete classes.
